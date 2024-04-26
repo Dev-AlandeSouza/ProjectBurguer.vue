@@ -13,6 +13,8 @@ export default {
   name: 'Navbar',
   props: ['logo', 'alt']
 }
+
+
 </script>
 
 <style scoped>
@@ -30,7 +32,11 @@ export default {
    display: flex;
    justify-content: flex-end;
    align-items: center;
-
+   background-color: #333;
+   overflow: hidden;
+   position: fixed;
+   top: 0;
+   width: 100%;
    }
 
    #navbar #logo-url {
