@@ -1,44 +1,46 @@
 <template>
-    <div class="form-container" >
-        <h2 class="form-title">Formulário de Pedido</h2>
-        <form id="burger-form" @submit.prevent="submitForm">
-            <div class="form-group">
-                <label for="name">Nome do Cliente:</label>
-                <input type="text" id="name" name="name" v-model="name" placeholder="Digite seu nome" required>
-            </div>
-            <div class="form-group">
-                <label for="bread">Escolha o Pão:</label>
-                <select name="bread" id="bread" v-model="bread" required>
-                    <option value="">Selecione seu pão:</option>
-                    <option value="integral">Integral</option>
-                    <option value="branco">Branco</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="meat">Escolha a carne do Burger:</label>
-                <select name="meat" id="meat" v-model="meat" required>
-                    <option value="">Selecione seu tipo de carne:</option>
-                    <option value="maminha">Maminha</option>
-                    <option value="frango">Frango</option>
-                    <option value="vegetariano">Vegetariano</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Selecione os opcionais:</label>
-                <div id="optional">
-                    <span>
-                        <input type="checkbox" value="bacon" v-model="optional"> Bacon
-                    </span>
-                    <span>
-                        <input type="checkbox" value="cheddar" v-model="optional"> Cheddar
-                    </span>
-                    <span>
-                        <input type="checkbox" value="ovo" v-model="optional"> Ovo
-                    </span>
+    <div>
+        <div class="form-container">
+            <h2 class="form-title">Formulário de Pedido</h2>
+            <form id="burger-form" @submit.prevent="submitForm">
+                <div class="form-group">
+                    <label for="name">Nome do Cliente:</label>
+                    <input type="text" id="name" name="name" v-model="name" placeholder="Digite seu nome" required>
                 </div>
-            </div>
-            <button type="submit" class="submit-button" :disabled="!isValidForm">Enviar Pedido</button>
-        </form>
+                <div class="form-group">
+                    <label for="bread">Escolha o Pão:</label>
+                    <select name="bread" id="bread" v-model="selectedBread">
+                        <option value="">Selecione seu pão:</option>
+                        <option v-for="selectedBread in breads" :key="selectedBread.id" :value="selectedBread.type">{{ selectedBread.type }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="meat">Escolha a carne do Burger:</label>
+                    <select name="meat" id="meat" v-model="selectedMeat" required>
+                        <option value="">Selecione seu tipo de carne:</option>
+                        <option v-for="selectedMeat in meats" :key="selectedMeat.id" :value="selectedMeat.type">{{ selectedMeat.type }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Selecione os opcionais:</label>
+                    <div id="optional">
+                        <span>
+                            <input type="checkbox" name="optionals" value="bacon" v-model="selectedOptionals">
+                            Bacon
+                        </span>
+                        <span>
+                            <input type="checkbox" name="optionals" value="cheddar" v-model="selectedOptionals">
+                            Cheddar
+                        </span>
+                        <span>
+                            <input type="checkbox" name="optionals" value="ovo" v-model="selectedOptionals">
+                            Ovo
+                        </span>    
+                    </div>
+                </div>
+                <button type="submit" class="submit-button" :disabled="!isValidForm">Enviar Pedido</button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -46,38 +48,46 @@
 export default {
     data() {
         return {
-            name: '',
-            bread: '',
-            meat: '',
-            optional: [],
-        };
-    },
-    computed: {
-        isValidForm() {
-            return this.name && this.bread && this.meat;
+            name: null,
+            breads: null,
+            meats: null,
+            optionals: [],
+            selectedBread: null,
+            selectedMeat: null,
+            selectedOptional: null,
+            status: 'Solicitado',
+            msg: null
         }
     },
     methods: {
-        submitForm() {
-            // Lógica para enviar o formulário, por exemplo, enviar para um servidor
-            console.log('Formulário enviado:', {
-                name: this.name,
-                bread: this.bread,
-                meat: this.meat,
-                optional: this.optional
-            });
-            // Resetar o formulário após o envio
-            this.name = '';
-            this.bread = '';
-            this.meat = '';
-            this.optional = [];
+        async getIngredients() {
+            try {
+                const req = await fetch('http://localhost:3000/ingredients');
+                const data = await req.json();
+
+                this.selectedBread = data.breads;
+                this.selectedMeat = data.meats;
+                this.selectedOptional = optionals;
+            } catch (error) {
+                console.error('Erro ao buscar ingredientes:', error);
+            }
+        },
+        async submitForm() {
+            // Lógica para enviar o formulário
+        }
+    },
+    mounted() {
+        this.getIngredients();
+    },
+    computed: {
+        isValidForm() {
+            return this.name && this.selectedBread && this.selectedMeat;
         }
     }
 };
 </script>
 
 <style scoped>
-
 .form-title {
     text-align: center;
     font-size: 24px;
@@ -138,8 +148,10 @@ label {
 #optional {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding: 5px;
+    flex-wrap: wrap;
+    width: auto;
+    gap: 3px;
+    padding: 1px;
     margin: 5px;
 }
 
@@ -168,5 +180,4 @@ label {
 .submit-button:focus {
     outline: none;
 }
-
 </style>
