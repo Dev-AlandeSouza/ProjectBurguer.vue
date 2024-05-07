@@ -22,7 +22,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Selecione os opcionais:</label>
+                    <label for="optionals">Selecione os opcionais:</label>
                     <div class="optional-container">
                         <div class="optional-item" v-for="optional in selectedOptional" :key="optional.id">
                             <input type="checkbox" :id="optional.id" :value="optional.type" v-model="optionals">
@@ -81,7 +81,7 @@ export default {
             this.name = '';
             this.selectedBread = '';
             this.selectedMeat = '';
-            this.optionals = '';
+            this.optionals = [];
 
         }
     },
