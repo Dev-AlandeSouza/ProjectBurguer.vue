@@ -2,7 +2,7 @@
     <div>
         <div class="form-container">
             <h2 class="form-title">Formulário de Pedido</h2>
-            <form id="burger-form" @submit.prevent="submitForm">
+            <form id="burger-form" @submit.prevent="createBurger">
                 <div class="form-group">
                     <label for="name">Nome do Cliente:</label>
                     <input type="text" id="name" name="name" v-model="name" placeholder="Digite seu nome" required>
@@ -23,19 +23,11 @@
                 </div>
                 <div class="form-group">
                     <label>Selecione os opcionais:</label>
-                    <div id="optional">
-                        <span>
-                            <input type="checkbox" name="optionals" value="bacon" v-model="selectedOptionals">
-                            Bacon
-                        </span>
-                        <span>
-                            <input type="checkbox" name="optionals" value="cheddar" v-model="selectedOptionals">
-                            Cheddar
-                        </span>
-                        <span>
-                            <input type="checkbox" name="optionals" value="ovo" v-model="selectedOptionals">
-                            Ovo
-                        </span>    
+                    <div class="optional-container">
+                        <div class="optional-item" v-for="optional in selectedOptional" :key="optional.id">
+                            <input type="checkbox" :id="optional.id" :value="optional.type" v-model="optionals">
+                            <span :for="optional.id">{{ optional.type }}</span>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="submit-button" :disabled="!isValidForm">Enviar Pedido</button>
@@ -55,25 +47,42 @@ export default {
             selectedBread: null,
             selectedMeat: null,
             selectedOptional: null,
-            status: 'Solicitado',
             msg: null
-        }
+        };
     },
     methods: {
         async getIngredients() {
-            try {
-                const req = await fetch('http://localhost:3000/ingredients');
-                const data = await req.json();
-
-                this.selectedBread = data.breads;
-                this.selectedMeat = data.meats;
-                this.selectedOptional = optionals;
-            } catch (error) {
-                console.error('Erro ao buscar ingredientes:', error);
-            }
+            const req = await fetch('http://localhost:3000/ingredients');
+            const data = await req.json();
+            this.breads = data.breads;
+            this.meats = data.meats;
+            this.selectedOptional = data.optionals;
         },
-        async submitForm() {
-            // Lógica para enviar o formulário
+        async createBurger(e) {
+            e.preventDefault();
+            const burger = {
+                name: this.name,
+                bread: this.selectedBread,
+                meat: this.selectedMeat,
+                optionals: Array.from(this.optionals),
+                status: "Solicitado"
+            };
+            
+            const req = await fetch('http://localhost:3000/burgers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(burger)
+            });
+            const data = await req.json();
+            this.msg = data.msg;
+
+            this.name = '';
+            this.selectedBread = '';
+            this.selectedMeat = '';
+            this.optionals = '';
+
         }
     },
     mounted() {
@@ -119,9 +128,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
     padding: 7px;
-    margin: 5px;
+    margin: 7px;
 }
 
 .form-group #name {
@@ -145,14 +154,24 @@ label {
     border-left: 4px solid #FFD700;
 }
 
-#optional {
+.optional-container {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    width: auto;
-    gap: 3px;
-    padding: 1px;
-    margin: 5px;
+    gap: 10px;
+}
+
+.optional-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.optional-item input[type="checkbox"] {
+    margin: 0;
+}
+
+.optional-item span {
+    color: #333;
 }
 
 .submit-button {
