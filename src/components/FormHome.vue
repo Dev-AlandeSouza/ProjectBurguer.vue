@@ -1,5 +1,6 @@
 <template>
     <div>
+        <MessageRegister :msg="msg" v-show="msg"/>
         <div class="form-container">
             <h2 class="form-title">Formulário de Pedido</h2>
             <form id="burger-form" @submit.prevent="createBurger">
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import MessageRegister from './Message.vue';
+
 export default {
     data() {
         return {
@@ -75,14 +78,19 @@ export default {
                 },
                 body: JSON.stringify(burger)
             });
+            
             const data = await req.json();
-            this.msg = data.msg;
+            
+            this.msg = `Pedido de '${data.id.toUpperCase()}' realizado com sucesso!`;
 
             this.name = '';
             this.selectedBread = '';
             this.selectedMeat = '';
             this.optionals = [];
 
+            setTimeout(() => {
+                this.msg = null;
+            }, 3000);
         }
     },
     mounted() {
@@ -92,6 +100,9 @@ export default {
         isValidForm() {
             return this.name && this.selectedBread && this.selectedMeat;
         }
+    }, 
+    components: {
+        MessageRegister
     }
 };
 </script>

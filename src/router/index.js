@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+
 const routes = [
   {
     path: '/homeview',
@@ -8,9 +9,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/pedidosview',
-    name: 'PedidosView',
-    component: () => import(/* webpackChunkName: "pedidos" */ '../views/PedidosView.vue')
+    path: '/orderregistra',
+    name: 'OrderRegistra',
+    component: () => import('../views/OrderRegistra.vue')
   }
 ]
 

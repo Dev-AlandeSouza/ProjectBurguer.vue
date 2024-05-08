@@ -79,27 +79,163 @@
   ],
   "burgers": [
     {
-      "id": "37d1",
-      "name": "Alan de Souza",
+      "id": "3c39",
+      "name": "Alan",
       "bread": "Italiano Branco",
-      "meat": "Picanha",
+      "meat": "Alcatra",
       "optionals": [
         "Bacon",
+        "Cheddar",
         "Salame",
-        "Cheddar"
+        "Tomate",
+        "Cebola roxa",
+        "Pepino"
       ],
       "status": "Solicitado"
     },
     {
-      "id": "7556",
-      "name": "Alan de Souza",
-      "bread": "Italiano Branco",
+      "id": "e0f5",
+      "name": "Alan",
+      "bread": "3 Queijos",
       "meat": "Alcatra",
       "optionals": [
         "Cheddar",
         "Bacon",
         "Salame",
-        "Cebola roxa"
+        "Tomate",
+        "Cebola roxa",
+        "Pepino"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "23c5",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Cheddar",
+        "Bacon",
+        "Salame",
+        "Tomate"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "0146",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Bacon",
+        "Cheddar",
+        "Salame"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "1a5e",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Alcatra",
+      "optionals": [
+        "Bacon",
+        "Cheddar"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "ec68",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Bacon",
+        "Cheddar",
+        "Salame",
+        "Tomate"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "9bda",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Salame"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "826d",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Bacon",
+        "Cheddar"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "bf83",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Alcatra",
+      "optionals": [
+        "Bacon"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "714e",
+      "name": "Alan",
+      "bread": "3 Queijos",
+      "meat": "Alcatra",
+      "optionals": [
+        "Bacon",
+        "Cheddar"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "c63f",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Bacon"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "0dff",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Bacon"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "d268",
+      "name": "Alan",
+      "bread": "3 Queijos",
+      "meat": "Maminha",
+      "optionals": [
+        "Bacon"
+      ],
+      "status": "Solicitado"
+    },
+    {
+      "id": "6fb5",
+      "name": "Alan",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Bacon"
       ],
       "status": "Solicitado"
     }
