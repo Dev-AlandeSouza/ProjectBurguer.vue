@@ -1,17 +1,17 @@
 <template>
   <Navbar :logo="logo_src" :alt="app_name"/>
   <router-view/>
-  <Footer/>
+<FooterPage/>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue'
+import FooterPage from './components/Footer.vue'
 
 export default {
   components: {
     Navbar,
-    Footer
+    FooterPage
   },
   data() {
     return {
@@ -36,7 +36,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin: 50px;
-  min-height: 250px;
+  height: 66.6vh;
 }
 
 h1 {
